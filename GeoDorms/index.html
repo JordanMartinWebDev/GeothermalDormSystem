@@ -117,7 +117,7 @@
           "https://media.sciencephoto.com/t1/36/00/90/t1360090-800px-wm.jpg";
         document.getElementById("popHeader").innerHTML = "Pipes";
         document.getElementById("popText").innerHTML =
-          "These are definitely pipes";
+          "Heat is collected throughout the water wells and dissipated into the ground. Water returns to the dorms with a lower temperature.";
       }
 
       function showWell() {
@@ -130,7 +130,7 @@
         document.getElementById("popImg").src = "./Img/Well.jpg";
         document.getElementById("popHeader").innerHTML = "Geothermal Well";
         document.getElementById("popText").innerHTML =
-          "This well goes pretty deep.  Like 300ft deep.";
+          "These are created by drilling a large hole down into the earth, usually at least 3 inches in diameter, until a specific depth is reached that can supply enough geothermal energy to heat and cool the facility it will be installed in. Our 220 wells are 300’ underneath the ground.";
       }
 
       function init() {
@@ -150,8 +150,8 @@
 
         new RGBELoader()
           .setDataType(THREE.UnsignedByteType)
-            .setPath( 'Img/' )
-            .load( 'Gradient.hdr', function ( texture ) {
+          .setPath("Img/")
+          .load("Gradient.hdr", function (texture) {
             let envMap = pmremGenerator.fromEquirectangular(texture).texture;
 
             scene.background = envMap;
