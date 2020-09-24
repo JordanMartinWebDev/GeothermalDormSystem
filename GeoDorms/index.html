@@ -128,14 +128,13 @@
 
         new RGBELoader()
             .setDataType( THREE.UnsignedByteType )
-            .setPath( 'three.js/examples/textures/equirectangular/' )
-            .load( 'quarry_01_1k.hdr', function ( texture ) {
+            .setPath( 'Img/' )
+            .load( 'Gradient.hdr', function ( texture ) {
 
                 let envMap = pmremGenerator.fromEquirectangular( texture ).texture;
 
                 scene.background = envMap;
                 scene.environment = envMap;
-                scene.background = new THREE.Color( 0xd4be92 );
 
                 texture.dispose();
                 pmremGenerator.dispose();
