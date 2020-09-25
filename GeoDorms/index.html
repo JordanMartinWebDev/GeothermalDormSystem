@@ -163,82 +163,30 @@
 
             let roughnessMipmapper = new RoughnessMipmapper(renderer);
 
-            let loader = new GLTFLoader().setPath("Models/");
-            loader.load("main.glb", function (gltf) {
-              var model = gltf
-              model.scene.traverse(function (child) {
+            let mainLoader = new GLTFLoader().setPath("Models/");
+            mainLoader.load("main.glb", function (gltf) {
+              var mainModel = gltf
+              mainModel.scene.traverse(function (child) {
                 if (child.isMesh) {
                 }
               });
-              scene.add(model.scene);
+              scene.add(mainModel.scene);
+              roughnessMipmapper.dispose();
+              render();
+            });
+            
+            let airLoader = new GLTFLoader().setPath("Models/");
+            airLoader.load("AirCooler.glb", function (gltf) {
+              var airModel = gltf
+              airModel.scene.traverse(function (child) {
+                if (child.isMesh) {
+                }
+              });
+              scene.add(airModel.scene);
               roughnessMipmapper.dispose();
               render();
             });
           });
-
-        let loader = new ColladaLoader();
-        loader.load(
-          "./three.js/examples/models/collada/stormtrooper/stormtrooper.dae",
-          function (collada) {
-            let animations = collada.animations;
-            avatar = collada.scene;
-
-            avatar.position.set(22.5, 9, -4);
-            avatar.rotateZ(3);
-            avatar.scale.set(0.8, 0.8, 0.8);
-
-            mixer = new THREE.AnimationMixer(avatar);
-            mixer.clipAction(animations[0]).play();
-          }
-        );
-
-        let loader2 = new ColladaLoader();
-        loader2.load(
-          "./three.js/examples/models/collada/stormtrooper/stormtrooper.dae",
-          function (collada) {
-            let animations = collada.animations;
-            st = collada.scene;
-
-            st.position.set(2, 0, 4);
-            st.rotateZ(5);
-            st.scale.set(0.8, 0.8, 0.8);
-
-            mixer2 = new THREE.AnimationMixer(st);
-            mixer2.clipAction(animations[0]).play();
-          }
-        );
-
-        let loader3 = new ColladaLoader();
-        loader3.load(
-          "./three.js/examples/models/collada/stormtrooper/stormtrooper.dae",
-          function (collada) {
-            let animations = collada.animations;
-            st2 = collada.scene;
-
-            st2.position.set(9, 0, -5);
-            st2.rotateZ(2);
-            st2.scale.set(2, 2, 1);
-
-            mixer3 = new THREE.AnimationMixer(st2);
-            mixer3.clipAction(animations[0]).play();
-          }
-        );
-
-        let loader4 = new ColladaLoader();
-        loader4.load(
-          "./three.js/examples/models/collada/stormtrooper/stormtrooper.dae",
-          function (collada) {
-            let animations = collada.animations;
-            st3 = collada.scene;
-
-            st3.position.set(22, 2.3, 6);
-            st3.rotateZ(4);
-            st3.scale.set(0.4, 0.4, 0.4);
-
-            mixer4 = new THREE.AnimationMixer(st3);
-            mixer4.clipAction(animations[0]).play();
-          }
-        );
 
         ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
         scene.add(ambientLight);
