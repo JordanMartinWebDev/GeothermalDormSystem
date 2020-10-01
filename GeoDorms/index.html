@@ -133,6 +133,8 @@
           "These are created by drilling a large hole down into the earth, usually at least 3 inches in diameter, until a specific depth is reached that can supply enough geothermal energy to heat and cool the facility it will be installed in. Our 220 wells are 300’ underneath the ground.";
       }
 
+      var mouse, raycaster;
+
       function init() {
         container = document.createElement("div");
         document.body.appendChild(container);
@@ -163,6 +165,8 @@
 
             let roughnessMipmapper = new RoughnessMipmapper(renderer);
 
+
+        //THIS SECTION OF CODE LOADS EACH MODEL INTO THE SCENE
             let mainLoader = new GLTFLoader().setPath("Models/");
             mainLoader.load("main.glb", function (gltf) {
               var mainModel = gltf
@@ -186,7 +190,87 @@
               roughnessMipmapper.dispose();
               render();
             });
+
+            let pipeLoader = new GLTFLoader().setPath("Models/");
+            pipeLoader.load("pipes.glb", function (gltf) {
+              var pipesModel = gltf
+              pipesModel.scene.traverse(function (child) {
+                if (child.isMesh) {
+                }
+              });
+              scene.add(pipesModel.scene);
+              roughnessMipmapper.dispose();
+              render();
+            });
+
+            let pumpLoader = new GLTFLoader().setPath("Models/");
+            pumpLoader.load("waterPumps.glb", function (gltf) {
+              var pumpModel = gltf
+              pumpModel.scene.traverse(function (child) {
+                if (child.isMesh) {
+                }
+              });
+              scene.add(pumpModel.scene);
+              roughnessMipmapper.dispose();
+              render();
+            });
+
+            let rmaLoader = new GLTFLoader().setPath("Models/");
+            rmaLoader.load("rmas.glb", function (gltf) {
+              var rmaModel = gltf
+              rmaModel.scene.traverse(function (child) {
+                if (child.isMesh) {
+                }
+              });
+              scene.add(rmaModel.scene);
+              roughnessMipmapper.dispose();
+              render();
+            });
+
+            let cCoolerLoader = new GLTFLoader().setPath("Models/");
+            cCoolerLoader.load("ceilingCoolers.glb", function (gltf) {
+              var cCoolerModel = gltf
+              cCoolerModel.scene.traverse(function (child) {
+                if (child.isMesh) {
+                }
+              });
+              scene.add(cCoolerModel.scene);
+              roughnessMipmapper.dispose();
+              render();
+            });
+
+            let wellLoader = new GLTFLoader().setPath("Models/");
+            wellLoader.load("well.glb", function (gltf) {
+              var wellModel = gltf
+              wellModel.scene.traverse(function (child) {
+                if (child.isMesh) {
+                }
+              });
+              scene.add(wellModel.scene);
+              roughnessMipmapper.dispose();
+              render();
+            });
+
+            let boilerLoader = new GLTFLoader().setPath("Models/");
+            boilerLoader.load("boiler.glb", function (gltf) {
+              var boilerModel = gltf
+              boilerModel.scene.traverse(function (child) {
+                if (child.isMesh) {
+                }
+              });
+              scene.add(boilerModel.scene);
+              roughnessMipmapper.dispose();
+              render();
+            });
           });
+        //END OF MODEL LOADING  
+
+        //This adds in raycasting
+        raycaster = new THREE.Raycaster();
+        mouse = new THREE.Vector2();
+        document.addEventListener('mousedown', onDocumentMouseDown, false);
+        document.addEventListener('touchstart',onDocumentTouchStart, false);
+        //End adding raycaster
 
         ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
         scene.add(ambientLight);
@@ -252,6 +336,35 @@
         controls.update();
         render();
       }
+
+      function onDocumentTouchStart( event ) {
+
+        event.preventDefault();
+        event.clinetX = event.touches[0].clientX;
+        event.clientY = event.touches[0].clientY;
+        onDocumentMouseDown(event);
+
+      }
+
+      function onDocumentMouseDown( event ) {
+
+        event.preventDefault();
+
+        mouse.x = (event.clientX / renderer.domElement.width) * 2 - 1;
+        mouse.y = - (event.clientY / renderer.domElement.height) * 2 + 1;
+
+        raycaster.setFromCamera(mouse,camera);
+        var intersects = raycaster.intersectObjects(scene.children);
+
+        if (intersects.length > 0){
+          if(INTERSECTED != intersects[0].object){
+            if (INTERSECTED == boilerModel){
+              console.log("Boiler hit.");
+                showBoiler();
+            }
+        }
+      }
+    }
 
       function render() {
         let delta = clock.getDelta();
