@@ -190,7 +190,8 @@
         controls.minDistance = 2;
         controls.maxDistance = 60;
         controls.target.set(15, 0, 0);
-        controls.autoRotate = 2.0;
+        controls.autoRotate = true;
+        controls.autoRotateSpeed = 1.5;
         controls.update();
 
         let pmremGenerator = new THREE.PMREMGenerator(renderer);
@@ -211,9 +212,9 @@
           .name("Rotation")
           .onChange(function (val) {
             if (val === true) {
-              controls.autoRotate = 2.0;
+              controls.autoRotate = true;
             } else {
-              controls.autoRotate = 0;
+              controls.autoRotate = false;
             }
           });
         window.addEventListener("resize", onWindowResize, false);
