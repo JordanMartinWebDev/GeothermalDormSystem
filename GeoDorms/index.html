@@ -53,9 +53,7 @@
       import { GUI } from "./three.js/examples/jsm/libs/dat.gui.module.js";
 
       let popup = document.getElementById("popup");
-      let avatar, st, st2, st3;
-      let clock, mixer, mixer2, mixer3, mixer4;
-      let container, controls;
+      let container, controls, clock;
       let ambientLight, camera, scene, renderer;
       let params = {
         showHome: showHome,
@@ -63,7 +61,7 @@
         showFluid: showFluid,
         showPipes: showPipes,
         showWell: showWell,
-        stormTroopers: false,
+        rotation: true,
       };
 
       init();
@@ -72,7 +70,7 @@
 
       function showBoiler() {
         camera.position.set(19.5, 2, -1);
-        controls.target.set(19.5, 2, -2);
+        controls.target.set(19.5, 2, -4);
         controls.update();
         camera.updateProjectionMatrix();
 
@@ -80,12 +78,12 @@
         document.getElementById("popImg").src = "./Img/BoilerImage.jpg";
         document.getElementById("popHeader").innerHTML = "Boiler";
         document.getElementById("popText").innerHTML =
-          "This isn't your average boiler. No, it's way better than that.  Like at least 10 times as good as a regular boiler!";
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque velit augue, consequat vitae nulla in, auctor interdum turpis.";
       }
 
       function showFluid() {
-        camera.position.set(26, 4, 5);
-        controls.target.set(22, 1, 5);
+        camera.position.set(26, 3, 5);
+        controls.target.set(21.3, 1, 4.7);
         controls.update();
         camera.updateProjectionMatrix();
 
@@ -94,7 +92,7 @@
           "https://i0.wp.com/tmrblog.com/wp-content/uploads/2019/12/cooling-tower-500x500.jpg?fit=500%2C412&ssl=1";
         document.getElementById("popHeader").innerHTML = "Cooling Tower";
         document.getElementById("popText").innerHTML =
-          "This cools stuff I'm pretty sure!";
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque velit augue, consequat vitae nulla in, auctor interdum turpis.";
       }
 
       function showHome() {
@@ -107,8 +105,8 @@
       }
 
       function showPipes() {
-        camera.position.set(10, 20, 0);
-        controls.target.set(10, 1, 0);
+        camera.position.set(12, 15, 19);
+        controls.target.set(12, 0, -2);
         controls.update();
         camera.updateProjectionMatrix();
 
@@ -117,12 +115,12 @@
           "https://media.sciencephoto.com/t1/36/00/90/t1360090-800px-wm.jpg";
         document.getElementById("popHeader").innerHTML = "Pipes";
         document.getElementById("popText").innerHTML =
-          "These are definitely pipes";
+          "Heat is collected throughout the water wells and dissipated into the ground. Water returns to the dorms with a lower temperature.";
       }
 
       function showWell() {
         camera.position.set(8, -5, 0);
-        controls.target.set(0, -5, 0);
+        controls.target.set(.5, -5, -2);
         controls.update();
         camera.updateProjectionMatrix();
 
@@ -130,7 +128,7 @@
         document.getElementById("popImg").src = "./Img/Well.jpg";
         document.getElementById("popHeader").innerHTML = "Geothermal Well";
         document.getElementById("popText").innerHTML =
-          "This well goes pretty deep.  Like 300ft deep.";
+          "These are created by drilling a large hole down into the earth, usually at least 3 inches in diameter, until a specific depth is reached that can supply enough geothermal energy to heat and cool the facility it will be installed in. Our 220 wells are 300’ underneath the ground.";
       }
 
       function init() {
@@ -150,8 +148,8 @@
 
         new RGBELoader()
           .setDataType(THREE.UnsignedByteType)
-            .setPath( 'Img/' )
-            .load( 'Gradient.hdr', function ( texture ) {
+          .setPath("Img/")
+          .load("Gradient.hdr", function (texture) {
             let envMap = pmremGenerator.fromEquirectangular(texture).texture;
 
             scene.background = envMap;
@@ -164,80 +162,17 @@
             let roughnessMipmapper = new RoughnessMipmapper(renderer);
 
             let loader = new GLTFLoader().setPath("Models/");
-            loader.load("hotmainV2.2.glb", function (gltf) {
-              gltf.scene.traverse(function (child) {
+            loader.load("main.glb", function (gltf) {
+              var model = gltf
+              model.scene.traverse(function (child) {
                 if (child.isMesh) {
                 }
               });
-              scene.add(gltf.scene);
+              scene.add(model.scene);
               roughnessMipmapper.dispose();
               render();
             });
           });
-
-        let loader = new ColladaLoader();
-        loader.load(
-          "./three.js/examples/models/collada/stormtrooper/stormtrooper.dae",
-          function (collada) {
-            let animations = collada.animations;
-            avatar = collada.scene;
-
-            avatar.position.set(22.5, 9, -4);
-            avatar.rotateZ(3);
-            avatar.scale.set(0.8, 0.8, 0.8);
-
-            mixer = new THREE.AnimationMixer(avatar);
-            mixer.clipAction(animations[0]).play();
-          }
-        );
-
-        let loader2 = new ColladaLoader();
-        loader2.load(
-          "./three.js/examples/models/collada/stormtrooper/stormtrooper.dae",
-          function (collada) {
-            let animations = collada.animations;
-            st = collada.scene;
-
-            st.position.set(2, 0, 4);
-            st.rotateZ(5);
-            st.scale.set(0.8, 0.8, 0.8);
-
-            mixer2 = new THREE.AnimationMixer(st);
-            mixer2.clipAction(animations[0]).play();
-          }
-        );
-
-        let loader3 = new ColladaLoader();
-        loader3.load(
-          "./three.js/examples/models/collada/stormtrooper/stormtrooper.dae",
-          function (collada) {
-            let animations = collada.animations;
-            st2 = collada.scene;
-
-            st2.position.set(9, 0, -5);
-            st2.rotateZ(2);
-            st2.scale.set(2, 2, 1);
-
-            mixer3 = new THREE.AnimationMixer(st2);
-            mixer3.clipAction(animations[0]).play();
-          }
-        );
-
-        let loader4 = new ColladaLoader();
-        loader4.load(
-          "./three.js/examples/models/collada/stormtrooper/stormtrooper.dae",
-          function (collada) {
-            let animations = collada.animations;
-            st3 = collada.scene;
-
-            st3.position.set(22, 2.3, 6);
-            st3.rotateZ(4);
-            st3.scale.set(0.4, 0.4, 0.4);
-
-            mixer4 = new THREE.AnimationMixer(st3);
-            mixer4.clipAction(animations[0]).play();
-          }
-        );
 
         ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
         scene.add(ambientLight);
@@ -255,6 +190,8 @@
         controls.minDistance = 2;
         controls.maxDistance = 60;
         controls.target.set(15, 0, 0);
+        controls.autoRotate = true;
+        controls.autoRotateSpeed = 1.5;
         controls.update();
 
         let pmremGenerator = new THREE.PMREMGenerator(renderer);
@@ -271,19 +208,13 @@
         gui.add(params, "showPipes").name("Pipes");
         gui.add(params, "showWell").name("Geothermal Well");
         gui
-          .add(params, "stormTroopers")
-          .name("Storm Troopers")
+          .add(params, "rotation")
+          .name("Rotation")
           .onChange(function (val) {
             if (val === true) {
-              scene.add(avatar);
-              scene.add(st);
-              scene.add(st2);
-              scene.add(st3);
+              controls.autoRotate = true;
             } else {
-              scene.remove(avatar);
-              scene.remove(st);
-              scene.remove(st2);
-              scene.remove(st3);
+              controls.autoRotate = false;
             }
           });
         window.addEventListener("resize", onWindowResize, false);
@@ -298,25 +229,12 @@
 
       function animate() {
         requestAnimationFrame(animate);
+        controls.update();
         render();
       }
 
       function render() {
         let delta = clock.getDelta();
-
-        if (mixer !== undefined) {
-          mixer.update(delta);
-        }
-        if (mixer2 !== undefined) {
-          mixer2.update(delta);
-        }
-        if (mixer3 !== undefined) {
-          mixer3.update(delta);
-        }
-        if (mixer4 !== undefined) {
-          mixer4.update(delta);
-        }
-
         renderer.render(scene, camera);
       }
     </script>
