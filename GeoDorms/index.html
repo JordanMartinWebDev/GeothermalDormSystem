@@ -263,7 +263,7 @@
               render();
             });
           });
-        //END OF MODEL LOADING  
+        //END OF MODEL LOADING
 
         //This adds in raycasting
         raycaster = new THREE.Raycaster();
@@ -358,7 +358,7 @@
 
         if (intersects.length > 0){
           if(INTERSECTED != intersects[0].object){
-            if (INTERSECTED == boilerModel){
+            if (INTERSECTED){
               console.log("Boiler hit.");
                 showBoiler();
             }
