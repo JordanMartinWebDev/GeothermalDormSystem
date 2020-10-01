@@ -53,9 +53,7 @@
       import { GUI } from "./three.js/examples/jsm/libs/dat.gui.module.js";
 
       let popup = document.getElementById("popup");
-      let avatar, st, st2, st3;
-      let clock, mixer, mixer2, mixer3, mixer4;
-      let container, controls;
+      let container, controls, clock;
       let ambientLight, camera, scene, renderer;
       let params = {
         showHome: showHome,
@@ -63,7 +61,7 @@
         showFluid: showFluid,
         showPipes: showPipes,
         showWell: showWell,
-        stormTroopers: false,
+        rotation: true,
       };
 
       init();
@@ -80,12 +78,12 @@
         document.getElementById("popImg").src = "./Img/BoilerImage.jpg";
         document.getElementById("popHeader").innerHTML = "Boiler";
         document.getElementById("popText").innerHTML =
-          "This isn't your average boiler. No, it's way better than that.  Like at least 10 times as good as a regular boiler!";
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque velit augue, consequat vitae nulla in, auctor interdum turpis.";
       }
 
       function showFluid() {
-        camera.position.set(26, 4, 5);
-        controls.target.set(22, 1, 5);
+        camera.position.set(26, 3, 5);
+        controls.target.set(21.3, 1, 4.7);
         controls.update();
         camera.updateProjectionMatrix();
 
@@ -94,7 +92,7 @@
           "https://i0.wp.com/tmrblog.com/wp-content/uploads/2019/12/cooling-tower-500x500.jpg?fit=500%2C412&ssl=1";
         document.getElementById("popHeader").innerHTML = "Cooling Tower";
         document.getElementById("popText").innerHTML =
-          "This cools stuff I'm pretty sure!";
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque velit augue, consequat vitae nulla in, auctor interdum turpis.";
       }
 
       function showHome() {
@@ -107,8 +105,8 @@
       }
 
       function showPipes() {
-        camera.position.set(10, 20, 0);
-        controls.target.set(10, 1, 0);
+        camera.position.set(12, 15, 19);
+        controls.target.set(12, 0, -2);
         controls.update();
         camera.updateProjectionMatrix();
 
@@ -122,7 +120,7 @@
 
       function showWell() {
         camera.position.set(8, -5, 0);
-        controls.target.set(0, -5, 0);
+        controls.target.set(.5, -5, -2);
         controls.update();
         camera.updateProjectionMatrix();
 
@@ -289,7 +287,7 @@
         controls.maxDistance = 60;
         controls.target.set(15, 0, 0);
         controls.autoRotate = true;
-        controls.autoRotate = 2.0;
+        controls.autoRotateSpeed = 1.5;
         controls.update();
 
         let pmremGenerator = new THREE.PMREMGenerator(renderer);
@@ -306,19 +304,13 @@
         gui.add(params, "showPipes").name("Pipes");
         gui.add(params, "showWell").name("Geothermal Well");
         gui
-          .add(params, "stormTroopers")
-          .name("Storm Troopers")
+          .add(params, "rotation")
+          .name("Rotation")
           .onChange(function (val) {
             if (val === true) {
-              scene.add(avatar);
-              scene.add(st);
-              scene.add(st2);
-              scene.add(st3);
+              controls.autoRotate = true;
             } else {
-              scene.remove(avatar);
-              scene.remove(st);
-              scene.remove(st2);
-              scene.remove(st3);
+              controls.autoRotate = false;
             }
           });
         window.addEventListener("resize", onWindowResize, false);
@@ -368,20 +360,6 @@
 
       function render() {
         let delta = clock.getDelta();
-
-        if (mixer !== undefined) {
-          mixer.update(delta);
-        }
-        if (mixer2 !== undefined) {
-          mixer2.update(delta);
-        }
-        if (mixer3 !== undefined) {
-          mixer3.update(delta);
-        }
-        if (mixer4 !== undefined) {
-          mixer4.update(delta);
-        }
-
         renderer.render(scene, camera);
       }
     </script>
