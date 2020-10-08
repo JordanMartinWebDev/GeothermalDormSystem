@@ -50,6 +50,10 @@
       import { RGBELoader } from "./three.js/examples/jsm/loaders/RGBELoader.js";
       import { RoughnessMipmapper } from "./three.js/examples/jsm/utils/RoughnessMipmapper.js";
       import { GUI } from "./three.js/examples/jsm/libs/dat.gui.module.js";
+      THREE.ImageUtils.loadTexture("http://i.imgur.com/cTALZ.png");
+      import { snowHtml } from "./javascript/snowHtml.js";
+      import { snowThreejs } from "./javascript/snowThreejs.js";
+      //use function to create snow call: "init()" from snowHtml.js
 
       let popup = document.getElementById("popup");
       let container, controls, clock, mixer;
@@ -61,11 +65,17 @@
         showPipes: showPipes,
         showWell: showWell,
         rotation: true,
+        showSnow: showSnow,
       };
 
       init();
       createGUI();
       animate();
+
+      function showSnow() {
+        snowHtml.init();
+        snowThreejs;
+      }
 
       function showBoiler() {
         camera.position.set(19.5, 2, -1);
@@ -119,7 +129,7 @@
 
       function showWell() {
         camera.position.set(8, -5, 0);
-        controls.target.set(.5, -5, -2);
+        controls.target.set(0.5, -5, -2);
         controls.update();
         camera.updateProjectionMatrix();
 
@@ -162,10 +172,10 @@
 
             let loader = new GLTFLoader().setPath("Models/");
             loader.load("main.glb", function (gltf) {
-              let model = gltf
+              let model = gltf;
               let animations = gltf.animations;
 
-              mixer = new THREE.AnimationMixer( gltf.scene );
+              mixer = new THREE.AnimationMixer(gltf.scene);
               animations.forEach(function (clip) {
                 mixer.clipAction(clip).play();
               });
@@ -219,6 +229,7 @@
           .onChange(function (val) {
             controls.autoRotate = val === true;
           });
+        gui.add(params, "showSnow").name("Snow");
         window.addEventListener("resize", onWindowResize, false);
       }
 
@@ -238,10 +249,8 @@
       function render() {
         let delta = clock.getDelta();
 
-        if ( mixer !== undefined ) {
-
-          mixer.update( delta );
-
+        if (mixer !== undefined) {
+          mixer.update(delta);
         }
         renderer.render(scene, camera);
       }

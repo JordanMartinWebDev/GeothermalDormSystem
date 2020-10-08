@@ -1,183 +1,186 @@
 body {
-    margin: 0;
-    background-color: #000;
-    color: #fff;
-    font-family: Monospace;
-    font-size: 13px;
-    line-height: 24px;
-    overscroll-behavior: none;
+  margin: 0;
+  background-color: #000;
+  color: #fff;
+  font-family: Monospace;
+  font-size: 13px;
+  line-height: 24px;
+  overscroll-behavior: none;
+  /*overflow: hidden;*/
 }
 
 a {
-    color: #ff0;
-    text-decoration: none;
+  color: #ff0;
+  text-decoration: none;
 }
 
 a:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 button {
-    cursor: pointer;
-    text-transform: uppercase;
+  cursor: pointer;
+  text-transform: uppercase;
 }
 
 canvas {
-    display: block;
+  display: block;
 }
 
 #title {
-    position: absolute;
-    top: 0px;
-    width: 100%;
-    padding: 10px;
-    box-sizing: border-box;
-    text-align: center;
-    -moz-user-select: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    pointer-events: none;
-    z-index: 1; /* TODO Solve this in HTML */
+  position: absolute;
+  top: 0px;
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  text-align: center;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  pointer-events: none;
+  z-index: 1; /* TODO Solve this in HTML */
 }
-.names{
-
-    color: #1b1b1b;
-    position: absolute;
-    padding: 10px;
-    bottom: 10px;
-    width: 100%;
-    box-sizing: border-box;
-    text-align: right;
-    -moz-user-select: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    pointer-events: none;
-    z-index: 1; /* TODO Solve this in HTML */
+.names {
+  color: #1b1b1b;
+  position: absolute;
+  padding: 10px;
+  bottom: 10px;
+  width: 100%;
+  box-sizing: border-box;
+  text-align: right;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  pointer-events: none;
+  z-index: 1; /* TODO Solve this in HTML */
 }
 #info {
-    position: absolute;
-    top: 0px;
-    width: 100%;
-    padding: 10px;
-    box-sizing: border-box;
-    text-align: center;
-    -moz-user-select: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    pointer-events: none;
-    z-index: 1; /* TODO Solve this in HTML */
+  position: absolute;
+  top: 0px;
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  text-align: center;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  pointer-events: none;
+  z-index: 1; /* TODO Solve this in HTML */
 }
-a, button, input, select {
-    pointer-events: auto;
+a,
+button,
+input,
+select {
+  pointer-events: auto;
 }
 
 .dg.ac {
-    -moz-user-select: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    z-index: 2 !important; /* TODO Solve this in HTML */
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  z-index: 2 !important; /* TODO Solve this in HTML */
 }
 
 #overlay {
-    position: absolute;
-    z-index: 2;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(0,0,0,0.7);
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.7);
 }
 
 #overlay button {
-    background: #ffffff;
-    border: 0;
-    color: #000000;
-    padding: 16px 20px;
-    text-transform: uppercase;
-    cursor: pointer;
+  background: #ffffff;
+  border: 0;
+  color: #000000;
+  padding: 16px 20px;
+  text-transform: uppercase;
+  cursor: pointer;
 }
 
 #notSupported {
-    width: 50%;
-    margin: auto;
-    background-color: #f00;
-    margin-top: 20px;
-    padding: 10px;
+  width: 50%;
+  margin: auto;
+  background-color: #f00;
+  margin-top: 20px;
+  padding: 10px;
 }
-.inform{
-    font-size: 33px;
-    margin-right: 50%;
+.inform {
+  font-size: 33px;
+  margin-right: 50%;
 }
-*{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 
 /*Default Theme*/
-.default{
-    --text-color: #ffffff;
-    --background: #000000;
-    --neutral: rgba(229,229,229,0.3);
+.default {
+  --text-color: #ffffff;
+  --background: #000000;
+  --neutral: rgba(229, 229, 229, 0.3);
 }
 
 /*Dark Theme*/
-.dark{
-    --text-color: #ffffff;
-    --background: #141945;
-    --neutral: rgba(229,229,229,0.3);
+.dark {
+  --text-color: #ffffff;
+  --background: #141945;
+  --neutral: rgba(229, 229, 229, 0.3);
 }
 
-.container{
-    width: 300px;
-    height: 500px;
-    padding: 12px;
-    box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
-    position: absolute;
-    top: 50%;
-    left: 25%;
-    transform: translate(-50%,-50%);
-    background-color: var(--background);
-    border-radius: 10px;
-    color: var(--text-color);
-    display: flex;
-    flex-direction: column;
-    font-family: 'Open Sans';
+.container {
+  width: 300px;
+  height: 500px;
+  padding: 12px;
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+  position: absolute;
+  top: 50%;
+  left: 25%;
+  transform: translate(-50%, -50%);
+  background-color: var(--background);
+  border-radius: 10px;
+  color: var(--text-color);
+  display: flex;
+  flex-direction: column;
+  font-family: "Open Sans";
 }
 
-.header{
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+.header {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.popMain{
-    background-color: #1b1b1b;
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+.popMain {
+  background-color: #1b1b1b;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-.popMain img{
-    width: 200px;
+.popMain img {
+  width: 200px;
 }
 
-.popMain h1{
-    margin-top: 1rem;
+.popMain h1 {
+  margin-top: 1rem;
 }
 
-.popMain p{
-    margin: 1rem;
-    text-align: justify;
+.popMain p {
+  margin: 1rem;
+  text-align: justify;
 }
