@@ -48,12 +48,11 @@
       import { OrbitControls } from "./three.js/examples/jsm/controls/OrbitControls.js";
       import { GLTFLoader } from "./three.js/examples/jsm/loaders/GLTFLoader.js";
       import { RGBELoader } from "./three.js/examples/jsm/loaders/RGBELoader.js";
-      import { ColladaLoader } from "./three.js/examples/jsm/loaders/ColladaLoader.js";
       import { RoughnessMipmapper } from "./three.js/examples/jsm/utils/RoughnessMipmapper.js";
       import { GUI } from "./three.js/examples/jsm/libs/dat.gui.module.js";
 
       let popup = document.getElementById("popup");
-      let container, controls, clock;
+      let container, controls, clock, mixer;
       let ambientLight, camera, scene, renderer;
       let params = {
         showHome: showHome,
@@ -163,7 +162,14 @@
 
             let loader = new GLTFLoader().setPath("Models/");
             loader.load("main.glb", function (gltf) {
-              var model = gltf
+              let model = gltf
+              let animations = gltf.animations;
+
+              mixer = new THREE.AnimationMixer( gltf.scene );
+              animations.forEach(function (clip) {
+                mixer.clipAction(clip).play();
+              });
+
               model.scene.traverse(function (child) {
                 if (child.isMesh) {
                 }
@@ -211,11 +217,7 @@
           .add(params, "rotation")
           .name("Rotation")
           .onChange(function (val) {
-            if (val === true) {
-              controls.autoRotate = true;
-            } else {
-              controls.autoRotate = false;
-            }
+            controls.autoRotate = val === true;
           });
         window.addEventListener("resize", onWindowResize, false);
       }
@@ -235,6 +237,12 @@
 
       function render() {
         let delta = clock.getDelta();
+
+        if ( mixer !== undefined ) {
+
+          mixer.update( delta );
+
+        }
         renderer.render(scene, camera);
       }
     </script>
