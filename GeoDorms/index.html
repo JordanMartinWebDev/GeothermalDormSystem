@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>GEODUDE WORKSPACE</title>
+  <title>Geothermal System</title>
   <meta charset="utf-8" />
   <meta
           content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
@@ -19,7 +19,7 @@
         font-weight: 600;
       "
 >
-  GEOTHRERMAL DORM SYSTEM
+  GEOTHERMAL DORM SYSTEM
 </div>
 
 <div class="container default" id="popup">
@@ -27,13 +27,14 @@
     <img id="popImg" src="Img/Home.JPG" />
     <h1 id="popHeader">Geothermal System</h1>
     <p id="popText" style="font-size: 15px">
-      Welcome to our animated model of a Geothermal System!
+      Welcome to our animated 3D model of Southeastern Louisiana University's Geothermal Dorm System!
     </p>
   </div>
 </div>
 
 <div class="names">
-  Scott Comeaux, Logan Freeman, Joeseph Gomez, Jordan Martin
+  <strong>Developers: Scott Comeaux, Logan Freeman, Joeseph Gomez, Jordan Martin</strong>
+  <strong>Client: Alejandro Martinez</strong>
 </div>
 
 <style>
@@ -57,7 +58,7 @@
   let params = {
     showHome: showHome,
     showBoiler: showBoiler,
-    showFluid: showFluid,
+    showCoolingTower: showCoolingTower,
     showPipes: showPipes,
     showWell: showWell,
     rotation: true,
@@ -80,10 +81,10 @@
     document.getElementById("popImg").src = "./Img/BoilerImage.jpg";
     document.getElementById("popHeader").innerHTML = "Boiler";
     document.getElementById("popText").innerHTML =
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque velit augue, consequat vitae nulla in, auctor interdum turpis.";
+            "A heat transfer fluid, comprised of antifreeze and water, is inside the ground loop pipes. This heat transfer fluid removes heat from (heating mode) or delivers heat to (cooling mode) the earth surrounding the ground loop.";
   }
 
-  function showFluid() {
+  function showCoolingTower() {
     camera.position.set(26, 3, 5);
     controls.target.set(21.3, 1, 4.7);
     controls.update();
@@ -91,10 +92,10 @@
 
     popup.style.display = "flex";
     document.getElementById("popImg").src =
-            "https://i0.wp.com/tmrblog.com/wp-content/uploads/2019/12/cooling-tower-500x500.jpg?fit=500%2C412&ssl=1";
+            "./Img/CoolingTowel2.JPG";
     document.getElementById("popHeader").innerHTML = "Cooling Tower";
     document.getElementById("popText").innerHTML =
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque velit augue, consequat vitae nulla in, auctor interdum turpis.";
+            "The Cooling Tower is a heat rejection device that rejects waste heat to the atmosphere through the cooling of a water stream to a lower temperature.";
   }
 
   function showHome() {
@@ -259,7 +260,7 @@
     let gui = new GUI({ name: "Damp setting" });
     gui.add(params, "showHome").name("Home View");
     gui.add(params, "showBoiler").name("Boiler");
-    gui.add(params, "showFluid").name("Fluid Cooler");
+    gui.add(params, "showCoolingTower").name("Cooling Tower");
     gui.add(params, "showPipes").name("Pipes");
     gui.add(params, "showWell").name("Geothermal Well");
     gui
