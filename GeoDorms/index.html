@@ -61,7 +61,7 @@
     showPipes: showPipes,
     showWell: showWell,
     rotation: true,
-    winter: true,
+    winter: false,
   };
   let mesh;
   let winter;
@@ -178,7 +178,6 @@
       particles.vertices.push(particle);
     }
     particleSystem = new THREE.PointCloud(particles, pMaterial);
-    scene.add(particleSystem);
 
     new RGBELoader()
             .setDataType(THREE.UnsignedByteType)
@@ -202,7 +201,7 @@
 
                 mixer = new THREE.AnimationMixer( gltf.scene );
                 animations.forEach(function (clip) {
-                  mixer.clipAction(clip).play();
+                    mixer.clipAction(clip).play();
                 });
 
                 model.scene.traverse(function (child) {
@@ -253,6 +252,7 @@
       particle.y += particle.velocity.y;
     }
     particles.verticesNeedUpdate = true;
+    
   }
 
   function createGUI() {
@@ -273,10 +273,10 @@
             .name("Winter")
             .onChange(function (val) {
               if (val === true){
-                particleCount = 10000;
+                scene.add(particleSystem);
               }
               else{
-                particleCount = 0;
+                scene.remove(particleSystem);
               }
             });
     window.addEventListener("resize", onWindowResize, false);
