@@ -59,6 +59,7 @@
     showHome: showHome,
     showBoiler: showBoiler,
     showCoolingTower: showCoolingTower,
+    showHeatPump: showHeatPump,
     showPipes: showPipes,
     showWell: showWell,
     rotation: true,
@@ -78,7 +79,7 @@
     camera.updateProjectionMatrix();
 
     popup.style.display = "flex";
-    document.getElementById("popImg").src = "./Img/BoilerImage.jpg";
+    document.getElementById("popImg").src = "./Img/HeatPump.jpg";
     document.getElementById("popHeader").innerHTML = "Boiler";
     document.getElementById("popText").innerHTML =
             "A heat transfer fluid, comprised of antifreeze and water, is inside the ground loop pipes. This heat transfer fluid removes heat from (heating mode) or delivers heat to (cooling mode) the earth surrounding the ground loop.";
@@ -96,6 +97,20 @@
     document.getElementById("popHeader").innerHTML = "Cooling Tower";
     document.getElementById("popText").innerHTML =
             "The Cooling Tower is a heat rejection device that rejects waste heat to the atmosphere through the cooling of a water stream to a lower temperature.";
+  }
+
+  function showHeatPump() {
+    camera.position.set(26, 14, -8);
+    controls.target.set(21, 12, -9.3);
+    controls.update();
+    camera.updateProjectionMatrix();
+
+    popup.style.display = "flex";
+    document.getElementById("popImg").src =
+            "./Img/BoilerImage.JPG";
+    document.getElementById("popHeader").innerHTML = "Heat Pump";
+    document.getElementById("popText").innerHTML =
+            "As with any heat pump, geothermal and water-source heat pumps are able to heat, cool, and, if so equipped, supply the dorm with hot water.";
   }
 
   function showHome() {
@@ -261,6 +276,7 @@
     gui.add(params, "showHome").name("Home View");
     gui.add(params, "showBoiler").name("Boiler");
     gui.add(params, "showCoolingTower").name("Cooling Tower");
+    gui.add(params, "showHeatPump").name("Heat Pump");
     gui.add(params, "showPipes").name("Pipes");
     gui.add(params, "showWell").name("Geothermal Well");
     gui
