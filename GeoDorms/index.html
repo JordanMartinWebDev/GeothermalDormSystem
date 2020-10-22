@@ -158,33 +158,33 @@
     ref2: https://threejs.org/docs/#manual/en/introduction/Creating-text
     */
   
-    var material = new THREE.MeshPhongMaterial({
-        color: 0xdddddd
-    });
+    // var material = new THREE.MeshPhongMaterial({
+    //     color: 0xdddddd
+    // });
 
-    var fontLoader = new THREE.FontLoader();
+    // var fontLoader = new THREE.FontLoader();
 
-    fontLoader.load( 'fonts/helvetiker_regular.typeface.json', function ( font ) {
-      var textGeom = new THREE.TextGeometry( 'temp example', {
-        font: font,
-        size: 80,
-        height: 5,
-        curveSegments: 12,
-        bevelEnabled: true,
-        bevelThickness: 10,
-        bevelSize: 8,
-        bevelOffset: 0,
-        bevelSegments: 5
-      } );
-      //Move outside load function
-      var textMesh = new THREE.Mesh( textGeom, material );
-      scene.add( textMesh );
-    } );
+    // fontLoader.load( 'fonts/helvetiker_regular.typeface.json', function ( font ) {
+    //   var textGeom = new THREE.TextGeometry( 'temp example', {
+    //     font: font,
+    //     size: 80,
+    //     height: 5,
+    //     curveSegments: 12,
+    //     bevelEnabled: true,
+    //     bevelThickness: 10,
+    //     bevelSize: 8,
+    //     bevelOffset: 0,
+    //     bevelSegments: 5
+    //   } );
+    //   //Move outside load function
+    //   var textMesh = new THREE.Mesh( textGeom, material );
+    //   scene.add( textMesh );
+    // } );
 
-    // Do some optional calculations. This is only if you need to get the
-    // width of the generated text
-    textGeom.computeBoundingBox();
-    textGeom.textWidth = textGeom.boundingBox.max.x - textGeom.boundingBox.min.x;
+    // // Do some optional calculations. This is only if you need to get the
+    // // width of the generated text
+    // textGeom.computeBoundingBox();
+    // textGeom.textWidth = textGeom.boundingBox.max.x - textGeom.boundingBox.min.x;
 
     /* End of 3D Text Example */
 
@@ -241,8 +241,9 @@
                 });
 
                 model.scene.traverse(function (child) {
+                  console.log(child);
                   if (child.isMesh) {
-
+                      
                   }
                 });
                 scene.add(model.scene);
