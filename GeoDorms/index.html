@@ -22,7 +22,7 @@
   GEOTHERMAL DORM SYSTEM
 </div>
 
-<div class="container default" id="popup">
+<div class="container default" id="popup"style="left: 15%;">
   <div class="popMain">
     <img id="popImg" src="Img/Home.JPG" />
     <h1 id="popHeader">Geothermal System</h1>
@@ -32,9 +32,26 @@
   </div>
 </div>
 
+<div class="container default" id="popup2"style="left: 85%; display: none">
+  <div class="popMain">
+    <h1 id="popHeader2">Geothermal Energy</h1>
+    <p id="popText2" style="font-size: 15px">
+      Geothermal energy is the heat from the Earth. The word geothermal comes from the Greek words geo (earth) and therme (heat). Geothermal energy is a renewable energy source because heat is continuously produced inside the earth. People use geothermal heat to heat buildings and generate electricity. Geothermal heat pumps use the earth as a heat source in the winter and as a heat storage source in the summer. This allows the system to provide extremely efficient heating or cooling all year long in virtually any climate.
+    </p>
+  </div>
+</div>
+
 <div class="names">
   <strong>Developers: Scott Comeaux, Logan Freeman, Joeseph Gomez, Jordan Martin</strong>
 </div>
+
+<div class="names" style="position: fixed; bottom: 0px; left: 0px; width: 0%" >
+  <a href="https://www.southeastern.edu/sustainability">
+    <img src = Img/logo.png style="width:150px;height:150px;">
+  </a>
+</div>
+
+
 
 <style>
   body {
@@ -54,6 +71,7 @@
   var raycaster, mouse; //Added for Raycasting
 
   let popup = document.getElementById("popup");
+  let popup2 = document.getElementById("popup2");
   let container, controls, clock, mixer;
   let ambientLight, camera, scene, renderer;
   let params = {
@@ -81,9 +99,11 @@
     controls.target.set(19.5, 2, -4);
     controls.update();
     camera.updateProjectionMatrix();
-
+    popup.style.left = "15%";
+    popup2.style.display = "none";
     popup.style.display = "flex";
-    document.getElementById("popImg").src = "./Img/HeatPump.jpg";
+    popup.style.height = "500px";
+    document.getElementById("popImg").src = "./Img/MechanicalRoom(Cropped).jpg";
     document.getElementById("popHeader").innerHTML = "Boiler";
     document.getElementById("popText").innerHTML =
             "A heat transfer fluid, comprised of antifreeze and water, is inside the ground loop pipes. This heat transfer fluid removes heat from (heating mode) or delivers heat to (cooling mode) the earth surrounding the ground loop.";
@@ -94,8 +114,10 @@
     controls.target.set(21.3, 1, 4.7);
     controls.update();
     camera.updateProjectionMatrix();
-
+    popup.style.left = "15%";
+    popup2.style.display = "none";
     popup.style.display = "flex";
+    popup.style.height = "500px";
     document.getElementById("popImg").src =
             "./Img/CoolingTowel2.JPG";
     document.getElementById("popHeader").innerHTML = "Cooling Tower";
@@ -108,8 +130,10 @@
     controls.target.set(21, 12, -9.3);
     controls.update();
     camera.updateProjectionMatrix();
-
+    popup.style.left = "15%";
+    popup2.style.display = "none";
     popup.style.display = "flex";
+    popup.style.height = "500px";
     document.getElementById("popImg").src =
             "./Img/BoilerImage.JPG";
     document.getElementById("popHeader").innerHTML = "Heat Pump";
@@ -122,8 +146,15 @@
     controls.target.set(15, 0, 0);
     controls.update();
     camera.updateProjectionMatrix();
-
-    popup.style.display = "none";
+    popup.style.display = "flex";
+    popup.style.left = "15%";
+    popup2.style.display = "flex";
+    popup.style.height = "500px";
+    document.getElementById("popImg").src =
+            "";
+    document.getElementById("popHeader").innerHTML = "Savings";
+    document.getElementById("popText").innerHTML =
+            "Geothermal technology saves you money each and every day. By using the constant temperature below the earth's surface, your geothermal system doesn't need to work as hard heating and cooling your home. It runs more efficiently, so it costs you less money - up to 80% savings over your existing heating and cooling system costs!";
   }
 
   function showPipes() {
@@ -131,8 +162,10 @@
     controls.target.set(12, 0, -2);
     controls.update();
     camera.updateProjectionMatrix();
-
+    popup.style.left = "15%";
+    popup2.style.display = "none";
     popup.style.display = "flex";
+    popup.style.height = "500px";
     document.getElementById("popImg").src =
             "https://media.sciencephoto.com/t1/36/00/90/t1360090-800px-wm.jpg";
     document.getElementById("popHeader").innerHTML = "Pipes";
@@ -145,8 +178,10 @@
     controls.target.set(.5, -5, -2);
     controls.update();
     camera.updateProjectionMatrix();
-
+    popup.style.left = "15%";
+    popup2.style.display = "none";
     popup.style.display = "flex";
+    popup.style.height = "550px";
     document.getElementById("popImg").src = "./Img/Well.jpg";
     document.getElementById("popHeader").innerHTML = "Geothermal Well";
     document.getElementById("popText").innerHTML =
