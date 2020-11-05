@@ -68,6 +68,8 @@
   import { RoughnessMipmapper } from "./three.js/examples/jsm/utils/RoughnessMipmapper.js";
   import { GUI } from "./three.js/examples/jsm/libs/dat.gui.module.js";
 
+  var raycaster, mouse; //Added for Raycasting
+
   let popup = document.getElementById("popup");
   let popup2 = document.getElementById("popup2");
   let container, controls, clock, mixer;
@@ -85,7 +87,10 @@
   let mesh;
   let winter;
   let particleSystem, particleCount, particles;
+  
+  
   init();
+  render(); //Added for Raycasting
   createGUI();
   animate();
 
@@ -198,6 +203,8 @@
     scene = new THREE.Scene();
     clock = new THREE.Clock();
 
+    raycaster = new THREE.Raycaster();
+    mouse = new THREE.Vector2();
 
     var loader = new THREE.TextureLoader();
     loader.crossOrigin = '';
@@ -264,6 +271,7 @@
     }
     particleSystem = new THREE.PointCloud(particles, pMaterial);
 
+    // loading HOT glb 
     new RGBELoader()
             .setDataType(THREE.UnsignedByteType)
             .setPath("Img/")
@@ -280,7 +288,7 @@
               let roughnessMipmapper = new RoughnessMipmapper(renderer);
 
               let loader = new GLTFLoader().setPath("Models/");
-              loader.load("main.glb", function (gltf) {
+              loader.load("mainHotV2.6.glb", function (gltf) {
                 let model = gltf
                 let animations = gltf.animations;
 
@@ -368,6 +376,22 @@
             });
     window.addEventListener("resize", onWindowResize, false);
   }
+  //Joes Raycasting Function
+  function onClick() {
+        event.preventDefault();
+
+        mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+        mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+        raycaster.setFromCamera(mouse, camera);
+
+        var intersects = raycaster.intersectObjects(scene.children, true);
+
+        if (intersects.length > 0) {
+          
+          console.log("Intersection:", intersects[0]);
+        }
+      }
 
   function onWindowResize() {
     camera.aspect = window.innerWidth / window.innerHeight;
