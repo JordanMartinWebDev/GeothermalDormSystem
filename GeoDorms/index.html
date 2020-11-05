@@ -67,6 +67,7 @@
   let mesh;
   let winter;
   let particleSystem, particleCount, particles;
+  
   init();
   createGUI();
   animate();
@@ -196,7 +197,7 @@
               let roughnessMipmapper = new RoughnessMipmapper(renderer);
 
               let loader = new GLTFLoader().setPath("Models/");
-              loader.load("main.glb", function (gltf) {
+              loader.load("mainV2.3.glb", function (gltf) {
                 let model = gltf
                 let animations = gltf.animations;
 
