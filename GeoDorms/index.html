@@ -41,7 +41,7 @@
   </div>
 </div>
 
-<div class="names">
+<div class="">
   <strong>Developers: Scott Comeaux, Logan Freeman, Joeseph Gomez, Jordan Martin</strong>
 </div>
 
@@ -88,9 +88,11 @@
   let winter;
   let particleSystem, particleCount, particles;
   
+  window.addEventListener("click", onClick);
   
   init();
   render(); //Added for Raycasting
+  //onClick(event); //testing
   createGUI();
   animate();
 
@@ -135,7 +137,7 @@
     popup.style.display = "flex";
     popup.style.height = "500px";
     document.getElementById("popImg").src =
-            "./Img/BoilerImage.JPG";
+            "./Img/BoilerImage.jpg";
     document.getElementById("popHeader").innerHTML = "Heat Pump";
     document.getElementById("popText").innerHTML =
             "As with any heat pump, geothermal and water-source heat pumps are able to heat, cool, and, if so equipped, supply the dorm with hot water.";
@@ -209,41 +211,6 @@
     var loader = new THREE.TextureLoader();
     loader.crossOrigin = '';
 
-    /* 3D Text Example 
-    ref: https://blog.andrewray.me/creating-a-3d-font-in-three-js/
-    ref2: https://threejs.org/docs/#manual/en/introduction/Creating-text
-    */
-  
-    // var material = new THREE.MeshPhongMaterial({
-    //     color: 0xdddddd
-    // });
-
-    // var fontLoader = new THREE.FontLoader();
-
-    // fontLoader.load( 'fonts/helvetiker_regular.typeface.json', function ( font ) {
-    //   var textGeom = new THREE.TextGeometry( 'temp example', {
-    //     font: font,
-    //     size: 80,
-    //     height: 5,
-    //     curveSegments: 12,
-    //     bevelEnabled: true,
-    //     bevelThickness: 10,
-    //     bevelSize: 8,
-    //     bevelOffset: 0,
-    //     bevelSegments: 5
-    //   } );
-    //   //Move outside load function
-    //   var textMesh = new THREE.Mesh( textGeom, material );
-    //   scene.add( textMesh );
-    // } );
-
-    // // Do some optional calculations. This is only if you need to get the
-    // // width of the generated text
-    // textGeom.computeBoundingBox();
-    // textGeom.textWidth = textGeom.boundingBox.max.x - textGeom.boundingBox.min.x;
-
-    /* End of 3D Text Example */
-
     ///////////////////
     // SNOW  //
     ///////////////////
@@ -270,6 +237,7 @@
       particles.vertices.push(particle);
     }
     particleSystem = new THREE.PointCloud(particles, pMaterial);
+
 
     // loading HOT glb 
     new RGBELoader()
@@ -298,9 +266,9 @@
                 });
 
                 model.scene.traverse(function (child) {
-                  console.log(child);
+                  //console.log(child);
                   if (child.isMesh) {
-                      
+                    //console.log(child);
                   }
                 });
                 scene.add(model.scene);
@@ -376,23 +344,33 @@
             });
     window.addEventListener("resize", onWindowResize, false);
   }
-  //Joes Raycasting Function
-  function onClick() {
-        event.preventDefault();
+  //Joes Raycasting Function Added for Raycasting
+  function onClick(event) {
+    event.preventDefault();
 
-        mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-        mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+    //sets mouse click position to the TIP of Mouse
+    mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+    mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
 
-        raycaster.setFromCamera(mouse, camera);
+    raycaster.setFromCamera(mouse, camera);
 
-        var intersects = raycaster.intersectObjects(scene.children, true);
+    var intersects = raycaster.intersectObjects(scene.children, true);
 
-        if (intersects.length > 0) {
-          
-          console.log("Intersection:", intersects[0]);
-        }
+    if (intersects.length > 0) {
+      
+      console.log("Intersection:", intersects[0]);
+      console.log(intersects[0].object.name);
+      //gets object Name
+      let objectName = intersects[0].object.name
+      if(objectName === "Air_Cooler"){
+        showCoolingTower();
       }
+      //TODO: Jordan Task: NEED For All Objects!
+    }
+    
 
+  }
+  
   function onWindowResize() {
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
