@@ -81,7 +81,9 @@
     showHeatPump: showHeatPump,
     showPipes: showPipes,
     showWell: showWell,
-    rotation: true,
+    showRMA1: showRMA1,
+    showRMA2: showRMA2,
+    rotation: false,
     winter: false,
   };
   let mesh;
@@ -111,6 +113,37 @@
             "A heat transfer fluid, comprised of antifreeze and water, is inside the ground loop pipes. This heat transfer fluid removes heat from (heating mode) or delivers heat to (cooling mode) the earth surrounding the ground loop.";
   }
 
+  //Need to hear about rotation
+  function showRMA1() {
+    camera.position.set(14, 1, 5);
+    controls.target.set(15, 1, -2);
+    controls.update();
+    camera.updateProjectionMatrix();
+    popup.style.left = "15%";
+    popup2.style.display = "none";
+    popup.style.display = "flex";
+    popup.style.height = "500px";
+    document.getElementById("popImg").src = "./Img/MechanicalRoom(Cropped).jpg";
+    document.getElementById("popHeader").innerHTML = "RMA";
+    document.getElementById("popText").innerHTML =
+            "I have no idea what an RMA is.";
+  }
+  //need to hear about rotation
+  function showRMA2() {
+    camera.position.set(30, 1, -9);
+    controls.target.set(25, 1, -9);
+    controls.update();
+    camera.updateProjectionMatrix();
+    popup.style.left = "15%";
+    popup2.style.display = "none";
+    popup.style.display = "flex";
+    popup.style.height = "500px";
+    document.getElementById("popImg").src = "./Img/MechanicalRoom(Cropped).jpg";
+    document.getElementById("popHeader").innerHTML = "RMA";
+    document.getElementById("popText").innerHTML =
+            "I have no idea what an RMA is.";
+  }
+
   function showCoolingTower() {
     camera.position.set(26, 3, 5);
     controls.target.set(21.3, 1, 4.7);
@@ -128,8 +161,24 @@
   }
 
   function showHeatPump() {
-    camera.position.set(26, 14, -8);
-    controls.target.set(21, 12, -9.3);
+    camera.position.set(24, 11, -10);
+    controls.target.set(21, 11, -9);
+    controls.update();
+    camera.updateProjectionMatrix();
+    popup.style.left = "15%";
+    popup2.style.display = "none";
+    popup.style.display = "flex";
+    popup.style.height = "500px";
+    document.getElementById("popImg").src =
+            "./Img/BoilerImage.jpg";
+    document.getElementById("popHeader").innerHTML = "Heat Pump";
+    document.getElementById("popText").innerHTML =
+            "As with any heat pump, geothermal and water-source heat pumps are able to heat, cool, and, if so equipped, supply the dorm with hot water.";
+  }
+
+  function showHeatPump2() {
+    camera.position.set(18, 1, -1.5);
+    controls.target.set(18, 1, -2.5);
     controls.update();
     camera.updateProjectionMatrix();
     popup.style.left = "15%";
@@ -293,7 +342,7 @@
     controls.minDistance = 2;
     controls.maxDistance = 60;
     controls.target.set(15, 0, 0);
-    controls.autoRotate = true;
+    controls.autoRotate = false;
     controls.autoRotateSpeed = 1.5;
     controls.update();
 
@@ -325,6 +374,8 @@
     gui.add(params, "showHeatPump").name("Heat Pump");
     gui.add(params, "showPipes").name("Pipes");
     gui.add(params, "showWell").name("Geothermal Well");
+    gui.add(params, "showRMA1").name("RMA 1");
+    gui.add(params, "showRMA2").name("RMA 2");
     gui
             .add(params, "rotation")
             .name("Rotation")
@@ -364,6 +415,30 @@
       let objectName = intersects[0].object.name
       if(objectName === "Air_Cooler"){
         showCoolingTower();
+      }
+      if(objectName === "Cylinder.001_1_1"){
+        showBoiler();
+      }
+      if(objectName === "Cylinder.001_2_2"){
+        showBoiler();
+      }
+      if(objectName === "Cylinder001_0"){
+        showBoiler();
+      }
+      if(objectName === "RMA1"){
+        showRMA1();
+      }
+      if(objectName === "RMA2"){
+        showRMA2();
+      }
+      if(objectName === "well"){
+        showWell();
+      }
+      if(objectName === "waterpump1"){
+        showHeatPump();
+      }
+      if(objectName === "waterpump2"){
+        showHeatPump2();
       }
       //TODO: Jordan Task: NEED For All Objects!
     }
