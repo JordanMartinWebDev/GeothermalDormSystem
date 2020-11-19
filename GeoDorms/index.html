@@ -53,7 +53,6 @@
 
 <script type="module">
   import * as THREE from "./three.js/build/three.module.js";
-
   import { OrbitControls } from "./three.js/examples/jsm/controls/OrbitControls.js";
   import { GLTFLoader } from "./three.js/examples/jsm/loaders/GLTFLoader.js";
   import { RGBELoader } from "./three.js/examples/jsm/loaders/RGBELoader.js";
@@ -77,7 +76,6 @@
     showHeatPump: showHeatPump,
     showPipes: showPipes,
     showWell: showWell,
-    showRMA1: showRMA1,
     rotation: false,
     winter: false,
   };
@@ -151,35 +149,7 @@
     document.getElementById("popText").innerHTML =
             "As with any heat pump, geothermal and water-source heat pumps are able to heat, cool, and, if so equipped, supply the dorm with hot water.";
   }
-  function showRMA1() {
-    camera.position.set(14, 1, 5);
-    controls.target.set(15, 1, -2);
-    controls.update();
-    camera.updateProjectionMatrix();
-    popup.style.left = "15%";
-    popup2.style.display = "none";
-    popup.style.display = "flex";
-    popup.style.height = "500px";
-    document.getElementById("popImg").src = "";
-    document.getElementById("popHeader").innerHTML = "RMA";
-    document.getElementById("popText").innerHTML =
-            "Temp Text";
-  }
-  //need to hear about rotation
-  function showRMA2() {
-    camera.position.set(30, 1, -9);
-    controls.target.set(25, 1, -9);
-    controls.update();
-    camera.updateProjectionMatrix();
-    popup.style.left = "15%";
-    popup2.style.display = "none";
-    popup.style.display = "flex";
-    popup.style.height = "500px";
-    document.getElementById("popImg").src = "";
-    document.getElementById("popHeader").innerHTML = "RMA";
-    document.getElementById("popText").innerHTML =
-            "Temp Text";
-  }
+
   function showHome() {
     camera.position.set(34, 10, 12);
     controls.target.set(15, 0, 0);
@@ -320,7 +290,7 @@
     container.appendChild(renderer.domElement);
 
     controls = new OrbitControls(camera, renderer.domElement);
-    controls.addEventListener("change", render); // use if there is no animation loop
+    controls.addEventListener("change", render); 
     controls.minDistance = 2;
     controls.maxDistance = 60;
     controls.target.set(15, 0, 0);
@@ -346,7 +316,6 @@
       particle.y += particle.velocity.y;
     }
     particles.verticesNeedUpdate = true;
-    
   }
 
   function createGUI() {
@@ -357,7 +326,6 @@
     gui.add(params, "showHeatPump").name("Heat Pump");
     gui.add(params, "showPipes").name("Pipes");
     gui.add(params, "showWell").name("Geothermal Well");
-    gui.add(params, "showRMA1").name("RMA");
     gui
             .add(params, "rotation")
             .name("Rotation")
@@ -413,7 +381,6 @@
   }
 
   function onClick(event) {
-
     mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
     mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
 
@@ -437,12 +404,6 @@
       }
       if(objectName === "Cylinder001_0"){
         showBoiler();
-      }
-      if(objectName === "RMA1"){
-        showRMA1();
-      }
-      if(objectName === "RMA2"){
-        showRMA2();
       }
       if(objectName === "well"){
         showWell();
@@ -477,6 +438,7 @@
     }
     renderer.render(scene, camera);
   }
+
 </script>
 </body>
 </html>
