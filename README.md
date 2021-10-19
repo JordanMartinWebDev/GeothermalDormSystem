@@ -11,6 +11,8 @@ Project Installation Recommendation: To look at the project code more effectivel
                                      installing the Live Server Extension to view the project locally.
                                      Hosting the project was done through Heroku during presentations, and after project completetion hosting
                                      was turned over to the university.
+                                     
+Credit: This project was worked on by a group of: Scott Comeaux, Jordan Martin, Joe Gomez, and Logan Freeman
                                         
 License:
          The code for this site is under MIT License:
